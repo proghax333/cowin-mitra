@@ -11,7 +11,7 @@ export default function WebhookRemove(app) {
     const data = req.body;
     const webhook = new Webhook(data);
 
-    if (store.validate(data) && store.delete(webhook)) {
+    if (store.delete(webhook)) {
       res.type('application/json').send(
         jsonify({
           status: 'success',

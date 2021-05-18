@@ -1,4 +1,3 @@
-
 import Webhook from '../webhooks/Webhook';
 import { useWebhookStore } from '../webhooks/WebhookStore';
 import { routes } from './Routes';
@@ -9,10 +8,10 @@ export default function WebhookInsert(app) {
 
   app.put(routes.ADD_WEBHOOK.url, (req, res) => {
     const data = req.body;
-    const { url, owner, password } = data;
+    const { url, owner, password, district } = data;
 
-    if (url && owner && password) {
-      if (!store.find(url)) {
+    if (url && owner && password && district) {
+      if (!store.find({ url, district })) {
         store.insert(new Webhook(data));
         res.type('application/json').send(
           jsonify({
@@ -36,7 +35,7 @@ export default function WebhookInsert(app) {
         .send(
           jsonify({
             status: 'error',
-            message: 'Give { url, owner, password }',
+            message: 'Give proper data',
           })
         );
     }

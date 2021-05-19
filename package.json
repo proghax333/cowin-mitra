@@ -9,8 +9,10 @@
     "clean": "rm -rf build && mkdir build",
     "clean-build": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run serve",
-    "serve": "node ./build/index.js"
+    "dev-manager": "node src/StartWebhookManager.js",
+    "dev-server": "node src/StartWebhookServer.js",
+    "serve": "node ./build/index.js",
+    "start": "npm run serve"
   },
   "keywords": [
     "cowin",
@@ -29,8 +31,12 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.6.1"
   }
 }

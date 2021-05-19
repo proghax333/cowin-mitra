@@ -1,4 +1,3 @@
-
 import express from 'express';
 import cors from 'cors';
 import WebhookManagerAPI from './api/WebhookManagerAPI';
@@ -11,6 +10,15 @@ app.use(express.json());
 
 WebhookManagerAPI(app);
 
-app.listen(port, () => {
-  console.log(`Started the server on port ${port}.`);
-});
+export const WebhookManagerServer = {
+  app,
+  isStarted: false,
+  start: function() {
+    if (!this.isStarted) {
+      app.listen(port, () => {
+        console.log(`Started the Webhook Manager server on port ${port}.`);
+        this.isStarted = true;
+      });
+    }
+  },
+};

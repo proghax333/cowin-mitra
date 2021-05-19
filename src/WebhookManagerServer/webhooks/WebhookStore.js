@@ -1,3 +1,6 @@
+
+import { useSingleton } from '../../utils/Singleton';
+
 export class WebhookInMemoryDatabase {
   constructor() {
     this.webhooks = {};
@@ -73,11 +76,4 @@ class WebhookStore {
   }
 }
 
-function singletonStoreHelper() {
-  let instance = null;
-  return () => {
-    return instance || (instance = new WebhookStore());
-  };
-}
-
-export const useWebhookStore = singletonStoreHelper();
+export const useWebhookStore = useSingleton(WebhookStore);

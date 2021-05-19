@@ -4,4 +4,6 @@ require('@babel/core').transform('code', {
 require('@babel/register');
 require('babel-polyfill');
 
-require('./WebhookManagerServer/WebhookManagerServer.js');
+const { WebhookManagerServer } = require('./WebhookManagerServer/WebhookManagerServer.js');
+
+WebhookManagerServer.start();

@@ -30,6 +30,7 @@ export async function startPolling(api)
       for(const hook of hooks)
       {
         hook && hook.send(changes);
+        console.log(`Sending to ${hook.url}...`);
       }
     }
   }, 5000);

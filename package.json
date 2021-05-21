@@ -13,7 +13,7 @@
     "dev-server": "node build/StartWebhookServer.bundle.js",
     "cowin-api-test": "node build/CoWINApiTest.bundle.js",
     "appointment-test": "node build/AppointmentUtilsTest.bundle.js",
-    "telegram-bot": "node build/build/StartTelegramBot.bundle.js",
+    "telegram-bot": "node build/StartTelegramBot.bundle.js",
     "serve": "node ./build/index.js",
     "start": "npm run telegram-bot"
   },

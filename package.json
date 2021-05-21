@@ -13,8 +13,9 @@
     "dev-server": "node src/StartWebhookServer.js",
     "cowin-api-test": "node src/CoWINApiTest.js",
     "appointment-test": "node src/AppointmentUtilsTest.js",
+    "telegram-bot": "node ./build/StartTelegramBot.js",
     "serve": "node ./build/index.js",
-    "start": "npm run serve"
+    "start": "npm run telegram-bot"
   },
   "keywords": [
     "cowin",

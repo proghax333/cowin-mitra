@@ -20,7 +20,6 @@ const app = WebhookServer.app;
 
 app.post('/telegram', async (req, res) => {
   await bot.handleUpdate(req.body, res);
-  res.sendStatus(200);
 });
 
 bot.command('hello', (ctx) => {

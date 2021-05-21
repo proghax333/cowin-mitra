@@ -2,18 +2,18 @@
   "name": "cowin-automation",
   "version": "1.0.0",
   "description": "CoWIN API poller, Webhook provider and Telegram automation",
-  "main": "src/index.js",
+  "main": "build/index.bundle.js",
   "scripts": {
-    "dev": "nodemon --ignore *.json --exec babel-node --trace-warnings ./src/index.js",
+    "dev": "nodemon --ignore *.json --exec babel-node --trace-warnings ./build/index.bundle.js",
     "build": "npx babel -d ./build/lib ./lib && npx babel -d ./build/src ./src -s",
     "clean": "rm -rf build && mkdir build",
     "clean-build": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-manager": "npx babel-node src/StartWebhookManager.js",
-    "dev-server": "npx babel-node src/StartWebhookServer.js",
-    "cowin-api-test": "npx babel-node src/CoWINApiTest.js",
-    "appointment-test": "npx babel-node src/AppointmentUtilsTest.js",
-    "telegram-bot": "npx babel-node ./build/src/StartTelegramBot.js",
+    "dev-manager": "node build/StartWebhookManager.bundle.js",
+    "dev-server": "node build/StartWebhookServer.bundle.js",
+    "cowin-api-test": "node build/CoWINApiTest.bundle.js",
+    "appointment-test": "node build/AppointmentUtilsTest.bundle.js",
+    "telegram-bot": "node build/build/StartTelegramBot.bundle.js",
     "serve": "node ./build/index.js",
     "start": "npm run telegram-bot"
   },
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.2",
     "@babel/register": "^7.13.16",
@@ -38,7 +39,6 @@
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
-    "@babel/node": "^7.14.2",
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",

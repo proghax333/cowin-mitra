@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon --ignore *.json --exec babel-node --trace-warnings ./src/index.js",
-    "build": "babel -d ./build ./src -s",
+    "build": "npx babel -d ./build/lib ./lib && npx babel -d ./build/src ./src -s",
     "clean": "rm -rf build && mkdir build",
     "clean-build": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
     "dev-server": "node src/StartWebhookServer.js",
     "cowin-api-test": "node src/CoWINApiTest.js",
     "appointment-test": "node src/AppointmentUtilsTest.js",
-    "telegram-bot": "node ./build/StartTelegramBot.js",
+    "telegram-bot": "node ./build/src/StartTelegramBot.js",
     "serve": "node ./build/index.js",
     "start": "npm run telegram-bot"
   },
@@ -25,11 +25,11 @@
   "author": "Atmanand Nagpure",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.14.2",
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/register": "^7.13.16",
-    "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "nodemon": "^2.0.7"
   },
@@ -37,6 +37,7 @@
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "core-js": "^3.12.1",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",

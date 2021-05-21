@@ -1,7 +1,8 @@
-import { useSingleton } from '../utils/Singleton';
-import { makeRequest } from '../utils/Request';
+import { makeRequest } from '../../lib/utils/Request';
+import { useSingleton } from '../../lib/utils/Singleton';
 import { API_BASE_URL, routes } from './Routes';
 import axios from 'axios';
+import Observable from '../../lib/utils/Observable';
 
 const config = {
   headers: {
@@ -10,31 +11,20 @@ const config = {
   },
 };
 
-export class CoWINDataAPI {
+export class CoWINDataAPI extends Observable {
   constructor() {
+    super();
+
     this.routes = routes;
     this.isLoaded = false;
-    this.events = {
-      load: [],
-    };
+    this.events.load = [];
   }
 
   async loadData() {
-    let { states } = await this.loadStates();
+    await this.loadStates();
+    await this.loadDistricts();
 
-    let state_districts = {};
-    if (states) {
-      for (const state of states) {
-        // let state = states[0];
-        const { districts } = await this.loadDistrictsFromState(state.state_id);
-        state_districts[state.state_id] = districts;
-      }
-    }
-
-    this.states = states;
-    this.districts = state_districts;
-
-    this.fireEvent('load');
+    this.fireEvent(this.events.load);
     this.isLoaded = true;
   }
 
@@ -43,24 +33,43 @@ export class CoWINDataAPI {
       let response = axios.get(API_BASE_URL + routes.GET_STATES.url, config);
       return response;
     });
-    return states;
+
+    this.states = states.states;
   }
 
-  async loadDistrictsFromState(state) {
-    let districts = await makeRequest(async () => {
+  async getDistricts(state) {
+    return makeRequest(async () => {
       let response = axios.get(
         API_BASE_URL + routes.GET_DISTRICTS_FROM_STATES.url + `/${state}`,
         config
       );
       return response;
     });
-    return districts;
+  }
+
+  async loadDistricts() {
+    let districts = {};
+    
+    if (this.states) {
+      for (const state of this.states) {
+        const data = await this.getDistricts(state.state_id);
+        const state_districts = data.districts;
+        
+        state_districts?.forEach((district) => {
+          districts[district.district_id] = district;
+        });
+      }
+    }
+
+    this.districts = districts;
   }
 
   async getAppointmentByDistrict(district, date) {
     let appointments = await makeRequest(async () => {
       let response = axios.get(
-        API_BASE_URL + routes.APPOINTMENT_FIND_BY_DISTRICT.url + `?district_id=${district}&date=${date}`,
+        API_BASE_URL +
+          routes.APPOINTMENT_FIND_BY_DISTRICT.url +
+          `?district_id=${district}&date=${date}`,
         config
       );
       return response;
@@ -73,31 +82,14 @@ export class CoWINDataAPI {
       case 'load':
         if (this.isLoaded) {
           callback();
-          this.events.load = {};
+          this.events['load'] = [];
         } else {
-          this.events.load.push(callback);
+          this.events['load'].push(callback);
         }
         break;
     }
   }
-
-  fireEvent(event_type) {
-    if (this.events[event_type]) {
-      for (const callback of this.events[event_type]) {
-        callback();
-      }
-    }
-  }
 }
 
-export const useCoWINApi = (function () {
-  let instance = null;
-
-  return () => {
-    if (!instance) {
-      instance = new CoWINDataAPI();
-      instance.loadData();
-    }
-    return instance;
-  };
-})();
+/* singleton */
+export const useCoWINApi = useSingleton(CoWINDataAPI);

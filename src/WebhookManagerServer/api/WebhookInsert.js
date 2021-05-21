@@ -1,7 +1,7 @@
-import Webhook from '../webhooks/Webhook';
-import { useWebhookStore } from '../webhooks/WebhookStore';
+import Webhook from '../../../lib/webhooks/Webhook';
+import { useWebhookStore } from '../../../lib/webhooks/WebhookStore';
 import { routes } from './Routes';
-import { jsonify } from '../../utils/Jsonify';
+import { jsonify } from '../../../lib/utils/Jsonify';
 
 export default function WebhookInsert(app) {
   const store = useWebhookStore();

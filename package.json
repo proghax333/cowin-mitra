@@ -5,7 +5,7 @@
   "main": "build/index.bundle.js",
   "scripts": {
     "dev": "nodemon --ignore *.json --exec babel-node --trace-warnings ./build/index.bundle.js",
-    "build": "npx babel -d ./build/lib ./lib && npx babel -d ./build/src ./src -s",
+    "build": "npx webpack",
     "clean": "rm -rf build && mkdir build",
     "clean-build": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",

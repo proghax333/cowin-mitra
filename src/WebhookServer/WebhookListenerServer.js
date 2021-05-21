@@ -1,5 +1,5 @@
 
-import { jsonify } from '../utils/Jsonify';
+import { jsonify } from '../../lib/utils/Jsonify';
 
 export default function WebhookListenerServer(app) {
   app.post('/webhook', (req, res) => {

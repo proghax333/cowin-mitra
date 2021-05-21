@@ -11,6 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-manager": "node src/StartWebhookManager.js",
     "dev-server": "node src/StartWebhookServer.js",
+    "cowin-api-test": "node src/CoWINApiTest.js",
+    "appointment-test": "node src/AppointmentUtilsTest.js",
     "serve": "node ./build/index.js",
     "start": "npm run serve"
   },

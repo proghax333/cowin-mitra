@@ -12,7 +12,7 @@ app.use(express.json());
 WebhookListenerServer(app);
 
 export const WebhookServer = {
-  app,
+  app : app,
   isStarted: false,
   start: function () {
     if (!this.isStarted) {
@@ -23,8 +23,3 @@ export const WebhookServer = {
     }
   },
 };
-
-const store = useAppointmentStore('centers');
-store.on('updateAny', (data) => {
-  console.log(data);
-});

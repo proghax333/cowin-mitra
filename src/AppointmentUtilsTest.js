@@ -1,13 +1,7 @@
-require('@babel/core').transform('code', {
-  presets: ['@babel/preset-env'],
-});
-require('@babel/register');
-require('babel-polyfill');
 
-const { difference } = require('../lib/utils/Difference.js');
-const { useAppointmentStore } = require('../lib/appointments/AppointmentStore');
+import { useAppointmentStore } from '../lib/appointments/AppointmentStore';
 
-a = [
+let a = [
   {
     center_id: 696090,
     name: 'Ganesh Colony UHC (Covaxin)',
@@ -38,7 +32,7 @@ a = [
   },
 ];
 
-b = [
+let b = [
   {
     center_id: 696090,
     name: 'Ganesh Colony UHC (Covaxin)',

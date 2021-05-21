@@ -7,13 +7,13 @@ class WebhookConnector {
     this.config = new Webhook(config);
     config 
   }
-  subscribe(district_id) {
+  async subscribe(district_id) {
     this.config.district = district_id;
     await makeRequest(async () => {
       return axios.put(config.url, this.config);
     });
   }
-  unsubscribe(district_id) {
+  async unsubscribe(district_id) {
     this.config.district_id = district_id;
     await makeRequest(async () => {
       return axios.delete(config.url, this.config);

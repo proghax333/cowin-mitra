@@ -14,17 +14,18 @@ export const useBot = (() => {
 })();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+bot.telegram.setWebhook('https://warm-thicket-18527.herokuapp.com/telegram')
+
 const app = WebhookServer.app;
 
 app.post('/telegram', async (req, res) => {
   await bot.handleUpdate(req.body, res);
-  res.sendStatus(200);
 });
 
 bot.command('hello', (ctx) => {
-  ctx.reply(JSON.stringify(ctx));
+  ctx.reply("Hello there!");
 })
 
-bot.launch();
-
 WebhookServer.start();
+
+console.log("Launched the bot!");

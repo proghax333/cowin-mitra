@@ -1,11 +1,6 @@
-require('@babel/core').transform('code', {
-  presets: ['@babel/preset-env'],
-});
-require('@babel/register');
-require('babel-polyfill');
 
-const { useCoWINApi } = require('./CoWINDataAPI/CoWINDataAPI.js');
-const { jsonify } = require('../lib/utils/Jsonify.js');
+import { useCoWINApi } from './CoWINDataAPI/CoWINDataAPI.js';
+import { jsonify } from '../lib/utils/Jsonify.js';
 
 const api = useCoWINApi();
 

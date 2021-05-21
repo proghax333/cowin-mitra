@@ -49,18 +49,16 @@ export class CoWINDataAPI extends Observable {
 
   async loadDistricts() {
     let districts = {};
-    
+
     if (this.states) {
       for (const state of this.states) {
         const data = await this.getDistricts(state.state_id);
         const state_districts = data.districts;
-        
-        if(state_districts)
-        {
-          
-        state_districts.forEach((district) => {
-          districts[district.district_id] = district;
-        });
+
+        if (state_districts) {
+          state_districts.forEach((district) => {
+            districts[district.district_id] = district;
+          });
         }
       }
     }

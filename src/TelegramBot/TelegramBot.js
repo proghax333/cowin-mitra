@@ -1,5 +1,5 @@
 
-import WebhookServer from '../WebhookServer/WebhookServer';
+import { WebhookServer } from '../WebhookServer/WebhookServer';
 import { useAppointmentStore } from '../../lib/appointments/AppointmentStore';
 import { useSingleton } from '../../lib/utils/Singleton';
 import dotenv from 'dotenv';
@@ -14,7 +14,7 @@ export const useBot = (() => {
 })();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const app = WebhookServer.app();
+const app = WebhookServer.app;
 
 app.post('/telegram', async (req, res) => {
   await bot.handleUpdate(req.body, res);
@@ -24,3 +24,7 @@ app.post('/telegram', async (req, res) => {
 bot.command('hello', (ctx) => {
   ctx.reply(JSON.stringify(ctx));
 })
+
+bot.launch();
+
+WebhookServer.start();

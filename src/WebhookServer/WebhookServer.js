@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import WebhookListenerServer from './WebhookListenerServer';
-import { useAppointmentStore } from '../../lib/appointments/AppointmentStore';
 
 const app = express();
 const port = process.env.PORT || 5000;

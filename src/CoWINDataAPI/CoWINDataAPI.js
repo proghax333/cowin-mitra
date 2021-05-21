@@ -21,8 +21,8 @@ export class CoWINDataAPI extends Observable {
   }
 
   async loadData() {
-    await this.loadStates();
-    await this.loadDistricts();
+    //await this.loadStates();
+    //await this.loadDistricts();
 
     this.fireEvent(this.events.load);
     this.isLoaded = true;

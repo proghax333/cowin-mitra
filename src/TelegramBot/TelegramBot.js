@@ -24,7 +24,7 @@ app.post('/telegram', async (req, res) => {
 });
 
 bot.command('hello', (ctx) => {
-  ctx.reply(JSON.stringify(ctx));
+  ctx.reply("Hello there!");
 })
 
 WebhookServer.start();

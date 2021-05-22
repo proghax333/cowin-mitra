@@ -1,7 +1,5 @@
 
 import { WebhookServer } from '../WebhookServer/WebhookServer';
-import { useAppointmentStore } from '../../lib/appointments/AppointmentStore';
-import { useSingleton } from '../../lib/utils/Singleton';
 import dotenv from 'dotenv';
 import { Telegraf } from 'telegraf';
 
@@ -14,7 +12,7 @@ export const useBot = (() => {
 })();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-bot.telegram.setWebhook('https://warm-thicket-18527.herokuapp.com/telegram')
+bot.telegram.setWebhook(process.env.WEBHOOK_URL)
 
 const app = WebhookServer.app;
 

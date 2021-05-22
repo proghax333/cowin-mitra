@@ -10,7 +10,11 @@ api.on('load', () => {
   console.log(api.states);
   console.log(api.districts);
 
-  api.getAppointmentByDistrict(397, '21-05-2021').then((result) => {
+  api.getAppointmentByDistrict(397, '23-05-2021').then((result) => {
+    console.log(jsonify(result));
+  })
+  
+  api.getAppointmentCalendarByDistrict(397, '23-05-2021').then((result) => {
     console.log(jsonify(result));
   })
 })

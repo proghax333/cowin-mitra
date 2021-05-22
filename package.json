@@ -36,7 +36,8 @@
     "core-js": "^3.12.1",
     "nodemon": "^2.0.7",
     "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0"
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
@@ -46,6 +47,7 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
+    "moment-timezone": "^0.5.33",
     "node-fetch": "^2.6.1",
     "telegraf": "^4.3.0"
   }

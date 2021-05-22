@@ -79,6 +79,34 @@ export class CoWINDataAPI extends Observable {
     return appointments;
   }
 
+  async getAppointmentCalendarByDistrict(district, date) {
+    let data = await makeRequest(async () => {
+      let response = axios.get(
+        API_BASE_URL +
+          routes.APPOINTMENT_CALENDAR_BY_DISTRICT.url +
+          `?district_id=${district}&date=${date}`,
+        config
+      );
+      return response;
+    });
+    let sessions = [];
+    data.centers.forEach((center) => {
+      for (let session of center.sessions) {
+        let result = {
+          ...center
+        }
+        delete result.sessions;
+        for (let [key, value] of Object.entries(session)) {
+          result[key] = value;
+        }
+        sessions.push(result);
+      }
+    });
+    return {
+      sessions: sessions,
+    };
+  }
+
   on(event_type, callback) {
     switch (event_type) {
       case 'load':

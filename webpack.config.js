@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   target: 'node',
   entry: {
     "StartTelegramBot": ['@babel/polyfill', './src/StartTelegramBot.js'],
